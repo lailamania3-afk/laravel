@@ -8,7 +8,6 @@ on:
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -35,16 +34,15 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
 
-    - name: Execute tests (Unit and Feature tests)
+    - name: Execute tests
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
 
-    - name: Install Tailscale
-      run: curl -fsSL https://tailscale.com/install.sh
-    - name: Install & Connect Tailscale
-      run: tailscale up --auth-key=${{ secrets.TAILSCALE_KEY }}
-
+    - name: Execute Tailscale
+      run: curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up --auth-key=${{ secrets.TAILSCALE_KEY }}
+    
+    # ⏳ JEDA 20 MENIT
     - name: Tunggu 20 menit
       run: sleep 1200
