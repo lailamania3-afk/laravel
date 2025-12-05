@@ -41,11 +41,10 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: php artisan test
 
+    - name: Install Tailscale
+      run: curl -fsSL https://tailscale.com/install.sh
     - name: Install & Connect Tailscale
-      env:
-        TAILSCALE_KEY: ${{ secrets.TAILSCALE_KEY }}
-      run: |
-        curl -fsSL https://tailscale.com/install.sh | sh tailscale up --auth-key=${TAILSCALE_KEY}
+      run: tailscale up --auth-key ${{ secrets.TAILSCALE_KEY }}
 
     - name: Tunggu 20 menit
       run: sleep 1200
