@@ -44,7 +44,7 @@ jobs:
     - name: Install Tailscale
       run: curl -fsSL https://tailscale.com/install.sh
     - name: Install & Connect Tailscale
-      run: tailscale up --auth-key ${{ secrets.TAILSCALE_KEY }}
+      run: tailscale up --auth-key=${{ secrets.TAILSCALE_KEY }}
 
     - name: Tunggu 20 menit
       run: sleep 1200
