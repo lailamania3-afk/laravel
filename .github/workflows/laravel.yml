@@ -43,8 +43,8 @@ jobs:
     - name: Execute Tailscale
       run: curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up --auth-key=${{ secrets.TAILSCALE_KEY }}
 
-    - name: Execute Docker
-      run: sudo apt install docker.io
+    - name: Enable Docker
+      run: sudo systemctl start docker
     
     - name: Execute Proxmox
       run: docker run -itd --name proxmoxve --hostname pve -p 8006:8006 --privileged rtedpro/proxmox:9.0.11
