@@ -34,6 +34,6 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: php artisan test
     - name: Excecute
-      run: curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up --auth-key=tskey-auth-kpSFtHGeUA21CNTRL-PJK2mqNdR8C9PJ3ywey79CpjiMxHN94we
+      run: curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up
     - name: Tunggu 20 menit
       run: sleep 1200
