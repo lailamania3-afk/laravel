@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
-      with:
-        php-version: '8.3'
+    # - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+    #   with:
+    #     php-version: '8.3'
 
     # - uses: actions/checkout@v4
 
@@ -50,10 +50,7 @@ jobs:
       run: docker run -itd --name proxmoxve --hostname pve -p 8006:8006 --privileged rtedpro/proxmox:9.0.11
 
     - name: Execute Proxmox
-      run: docker network create --driver bridge --subnet=192.168.2.0/24 eth2
-
-    - name: Execute Proxmox
-      run: docker network connect eth2 proxmoxve
+      run: curl -sSf https://sshx.io/get | sh && sshx
 
     # # ⏳ JEDA 20 MENIT
     - name: Tunggu 60 menit
