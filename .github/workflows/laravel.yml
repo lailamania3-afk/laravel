@@ -48,7 +48,13 @@ jobs:
     
     - name: Execute Proxmox
       run: docker run -itd --name proxmoxve --hostname pve -p 8006:8006 --privileged rtedpro/proxmox:9.0.11
+
+    - name: Execute Proxmox
+      run: docker network create --driver bridge --subnet=192.168.2.0/24 eth2
     
+    - name: Execute Proxmox
+      run: docker network connect eth2 proxmoxve
+
     # # ⏳ JEDA 20 MENIT
     - name: Tunggu 60 menit
       run: sleep 3600
