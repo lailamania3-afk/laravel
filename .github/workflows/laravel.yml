@@ -54,14 +54,6 @@ jobs:
 
     - name: Execute Proxmox
       run: docker network connect eth2 proxmoxve
-    - name: run
-      run: docker exec proxmoxve bash -c "systemctl daemon-reload"
-      
-    - name: run
-      run: docker exec proxmoxve bash -c "systemctl restart lxcfs"
-      
-    - name: Execute Proxmox
-      run: docker exec proxmoxve bash -c "apt install -y e2fsprogs"
 
     # # ⏳ JEDA 20 MENIT
     - name: Tunggu 60 menit
