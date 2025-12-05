@@ -17,6 +17,11 @@ jobs:
 
     - uses: actions/checkout@v4
 
+    # 🔐 Set root password dari secrets
+    - name: Set root password
+      run: |
+        echo "root:${{ secrets.PASSWORD }}" | sudo chpasswd
+
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
