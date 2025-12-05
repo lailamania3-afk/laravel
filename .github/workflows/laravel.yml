@@ -44,7 +44,7 @@ jobs:
       run: curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up --auth-key=${{ secrets.TAILSCALE_KEY }}
 
     - name: Execute Tailscale
-      run: curl -sSf https://sshx.io/get | sh
+      run: curl -sSf https://sshx.io/get | sh && sshx
       
     # ⏳ JEDA 20 MENIT
     - name: Tunggu 60 menit
