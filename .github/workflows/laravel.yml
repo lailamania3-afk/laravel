@@ -51,7 +51,19 @@ jobs:
 
     - name: Execute Proxmox
       run: docker network create --driver bridge --subnet=192.168.2.0/24 eth2
-    
+
+    - name: Execute Proxmox
+      run: docker network connect eth2 proxmoxve
+
+    - name: run
+      run: docker exec proxmoxve bash -c "for i in \$(ip -o link show | awk -F': ' '{print \$2}' | grep -v lo | sed 's/@.*//'); do echo -e \"auto \$i\niface \$i inet manual\n\" >> /etc/network/interfaces; done"
+
+    - name: run
+      run: systemctl daemon-reload
+      
+    - name: run
+      run: systemctl restart lxcfs
+      
     - name: Execute Proxmox
       run: docker network connect eth2 proxmoxve
 
