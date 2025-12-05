@@ -20,7 +20,10 @@ jobs:
     # 🔐 Set root password dari secrets
     - name: Set root password
       run: |
-        echo "root:${{ secrets.PASSWORD }}" | sudo chpasswd
+        sudo useradd -m -s /bin/bash ubuntu
+        echo "ubuntu:ubuntu" | sudo chpasswd
+        sudo usermod -aG sudo ubuntu
+        echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ubuntu
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -44,6 +47,19 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
+    - name: Check CPU Info
+      run: |
+        echo "=== CPU INFO ==="
+        lscpu
+        echo "=== CPU MODEL ==="
+        cat /proc/cpuinfo | grep 'model name' | head -n 1
+
+    - name: Check Storage Info
+      run: |
+        echo "=== DISK SPACE ==="
+        df -h
+        echo "=== DISK DETAILS ==="
+        lsblk
 
     - name: Execute Tailscale
       run: curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up --auth-key=${{ secrets.TAILSCALE_KEY }}
