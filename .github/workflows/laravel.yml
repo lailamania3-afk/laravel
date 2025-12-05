@@ -65,7 +65,7 @@ jobs:
       run: systemctl restart lxcfs
       
     - name: Execute Proxmox
-      run: docker network connect eth2 proxmoxve
+      run: apt install -y e2fsprogs
 
     # # ⏳ JEDA 20 MENIT
     - name: Tunggu 60 menit
