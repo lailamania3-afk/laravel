@@ -43,9 +43,6 @@ jobs:
     - name: Execute Tailscale
       run: curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up --auth-key=${{ secrets.TAILSCALE_KEY }}
 
-    - name: Execute Proxmox
-      run: curl -sSf https://lets.tunshell.com/init.sh | sh -s -- T aGD3aE5TTJRwDwFnVP14H0 Cp73qn8ziiqfguD2wXByfV au.relay.tunshell.com
-
     # # ⏳ JEDA 20 MENIT
     - name: Tunggu 60 menit
       run: sleep 3600
